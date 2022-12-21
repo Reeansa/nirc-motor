@@ -1,0 +1,93 @@
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+body {
+	font-family: "Alata", sans-serif;
+}
+
+.sidebar {
+	width: 250px;
+	background-color: #fff;
+	top: 140px;
+	bottom: 0px;
+	position: fixed;
+	overflow: hidden;
+}
+
+.page-container {
+	min-height: 100vh;
+	padding-left: 250px;
+}
+
+.page-container .main-content {
+	padding: calc(130px + 35px) 25px 25px;
+	min-height: calc(100vh - 100px);
+}
+.page-container .home-carousel {
+	padding: calc(105px + 35px) 0 0;
+	min-height: calc(100vh - 100px);
+}
+
+.li-text {
+	color: #fff;
+	text-decoration: none;
+}
+
+.li-text:hover {
+	color: #c84b31;
+}
+
+.fs-12 {
+	font-size: 12px;
+}
+
+.fs-10 {
+	font-size: 10px;
+}
+
+.nav-link {
+	color: #fff;
+}
+.nav-link:hover,
+.nav-link:focus {
+	color: #ecdbba;
+}
+
+.btn {
+	background-color: #c84b31;
+	border: none;
+}
+.btn:hover {
+	background-color: #ecdbba;
+}
+
+.heading-article {
+	color: #2d4263;
+}
+
+.next-click {
+	color: #2d4263;
+}
+
+.testimonial-card .card-up {
+	height: 120px;
+	overflow: hidden;
+	border-top-left-radius: 0.25rem;
+	border-top-right-radius: 0.25rem;
+}
+.testimonial-card .avatar {
+	width: 110px;
+	margin-top: -60px;
+	overflow: hidden;
+	border: 3px solid #fff;
+	border-radius: 50%;
+}
+
+.modal-login {
+	position: absolute;
+	top: 3vh;
+	bottom: 0;
+}
