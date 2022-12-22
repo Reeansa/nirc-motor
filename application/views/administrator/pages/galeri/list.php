@@ -17,9 +17,6 @@
 				</tr>
 			</thead>
 			<tbody>
-			<?php
-                $i = 1;
-				foreach ($artikel as $artik) : ?>
 				<tr class="text-center">
 					<th scope="row">1</th>
 					<td>Brandon Jacob</td>
@@ -32,7 +29,6 @@
 						<button type="button" class="btn btn-danger"><i class="bi bi-exclamation-octagon"></i></button>
 					</td>
 				</tr>
-				<?php endforeach; ?>
 			</tbody>
 		</table>
 		<!-- End Default Table Example -->

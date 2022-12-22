@@ -7,19 +7,29 @@ class Sidebar extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
+		$this->load->model('Artikel_model');
+		$this->load->model('Events_model');
 	}
 
 	public function artikel($side = 'main/sidebar/artikel')
 	{
-		$data['title'] = 'Nirc | Artikel';
-		$data['kontenDinamis'] = $side;
+		
+		$data = [
+			'title' => 'Nirc | Artikel',
+			'kontenDinamis' => $side,
+			'artikel' => $this->Artikel_model->getAllArtikel(),
+		];
 		// $data['modalLogin'] = $this->load->view('main/login');
 		$this->load->view($this->template, $data);
 	}
 	public function event($side = 'main/sidebar/event')
 	{
-		$data['title'] = 'Nirc | Events';
-		$data['kontenDinamis'] = $side;
+		$data = [
+			'title' => 'Nirc | Events',
+			'kontenDinamis' => $side,
+			'events' => $this->Events_model->getAllEvents(),
+		];
+
 		$this->load->view($this->template, $data);
 	}
 	public function galeri($side = 'main/sidebar/galeri')

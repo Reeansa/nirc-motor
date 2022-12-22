@@ -18,22 +18,11 @@ class User extends CI_Controller
 		$this->load->model('User_model');
 	}
 
-	public function register($page = 'register')
-	{
-
-		if ($this->session->userdata('logged_in')) {
-			redirect('administrator/dashboard');
-		}
-
-		$data['title'] = 'Register';
-		$this->load->view('pages/' . $page, $data);
-	}
-
 	public function prosesRegister()
 	{
 
 		if ($this->session->userdata('logged_in')) {
-			redirect('administrator/dashboard');
+			redirect('administrator/profile');
 		}
 
 		$this->form_validation->set_rules('nama', 'Nama', 'required');
@@ -42,7 +31,7 @@ class User extends CI_Controller
 
 		if ($this->form_validation->run() == FALSE) {
 			//panggil method register
-			$this->register();
+
 		} else {
 			$dataRegister = [
 				'nama' => $this->input->post('nama'),
@@ -80,7 +69,7 @@ class User extends CI_Controller
 	public function prosesLogin()
 	{
 
-		if ($this->session->userdata('logged_in')) {
+		if ($this->session->userdata('username')) {
 			redirect('administrator/dashboard');
 		}
 
@@ -123,7 +112,7 @@ class User extends CI_Controller
 
 	public function logout()
 	{
-		$dataLogin = ['iduser', 'nama', 'username','password', 'logged_in'];
+		$dataLogin = ['iduser', 'nama', 'username', 'role'];
 
 		//delete session login
 		$this->session->unset_userdata($dataLogin);

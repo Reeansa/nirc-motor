@@ -49,13 +49,13 @@
 		<li class="nav-heading">Pages</li>
 		<!-- end heading side -->
 		<li class="nav-item">
-			<a class="nav-link collapsed" href="users-profile.html">
+			<a class="nav-link collapsed" href="<?= site_url('administrator/profile') ?>">
 				<i class="bi bi-person"></i>
 				<span>Profile</span>
 			</a>
 		</li>
 		<li class="nav-item">
-			<a class="nav-link collapsed" href="users-profile.html">
+			<a class="nav-link collapsed" href="<?= site_url('logout') ?>">
 				<i class="bi bi-box-arrow-right"></i>
 				<span>Sign Out</span>
 			</a>

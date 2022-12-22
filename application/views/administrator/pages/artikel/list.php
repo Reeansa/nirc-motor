@@ -15,9 +15,10 @@
 				<tr class="text-center">
 					<th scope="col">#</th>
 					<th scope="col">Nama</th>
+					<th scope="col">gambar</th>
 					<th scope="col">Judul</th>
 					<th scope="col">Kategori</th>
-					<th scope="col">Tanggal</th>
+					<th scope="col">Tanggal Buat</th>
 					<th scope="col">Aksi</th>
 				</tr>
 			</thead>
@@ -27,13 +28,18 @@
 				foreach ($artikel as $artik) : ?>
 					<tr class="text-center">
 						<th scope="row"><?= $i++ ?></th>
-						<td><?= $artik['iduser']; ?></td>
+						<td><?= $artik['nama']; ?></td>
+						<td><img src="<?= base_url('assets/images/artikel/').$artik['images'] ?>" height="50" width="50" alt=""> </td>
 						<td><?= $artik['judul']; ?></td>
 						<td><?= $artik['kategori']; ?></td>
 						<td><?= $artik['tanggal']; ?></td>
 						<td class="d-flex justify-content-center">
-							<button type="button" class="btn btn-success mx-2"><i class="bi bi-check-circle"></i></button>
-							<button type="button" class="btn btn-danger"><i class="bi bi-exclamation-octagon"></i></button>
+							<a href="<?= site_url('administrator/artikel/update/').$artik['idartikel']?>">
+								<button type="button" class="btn btn-success mx-2"><i class="bi bi-check-circle"></i></button>
+							</a>
+							<a href="<?= site_url('administrator/artikel/delete/').$artik['idartikel']?>">
+								<button type="button" class="btn btn-danger"><i class="bi bi-exclamation-octagon"></i></button>
+							</a>
 						</td>
 					</tr>
 				<?php endforeach; ?>

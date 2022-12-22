@@ -14,6 +14,7 @@ class Galeri extends CI_Controller {
 		$data = [
 			'title' => 'Administrator | Galeri',
 			'sideName' => 'Galeri',
+			'profile' => $this->db->get('user')->row_array(),
 			'kontenDinamis' => $page,
 		];
 		$this->load->view($this->adminTemplate, $data);

@@ -9,7 +9,6 @@ class Artikel extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('Artikel_model');
-		$this->load->model('User_model');
 	}
 
 	public function index($page = 'administrator/pages/artikel/list')
@@ -17,8 +16,8 @@ class Artikel extends CI_Controller
 		$data = [
 			'title' => 'Artikel | List',
 			'sideName' => 'Artikel',
-			'artikel' => $this->Artikel_model->semua(),
-			'user' => $this->Artikel_model->join2table(),
+			'artikel' => $this->Artikel_model->join2table(),
+			'profile' => $this->db->get('user')->row_array(),
 			'kontenDinamis' => $page,
 		];
 		$this->load->view($this->adminTemplate, $data);
@@ -29,41 +28,45 @@ class Artikel extends CI_Controller
 		$data = [
 			'title' => 'Artikel | Add',
 			'sideName' => 'Artikel',
+			'artikel' => $this->Artikel_model->getAllArtikel(),
+			'profile' => $this->db->get('user')->row_array(),
 			'kontenDinamis' => $page,
 		];
 
-		$this->load->view($this->adminTemplate, $data);
+		$this->form_validation->set_rules('judul', 'Judul', 'required');
+		$this->form_validation->set_rules('isiartikel', 'isi artikel', 'required');
+		$this->form_validation->set_rules('kategori', 'kategori', 'required');
+		$this->form_validation->set_rules('images', 'gambar', 'required');
+
+		if ($this->form_validation->run() == false) {
+			$this->load->view($this->adminTemplate, $data);
+		} else {
+			$this->Artikel_model->createArtikel();
+			redirect('administrator/artikel');
+		}
+	}
+	public function delete($idArtikel)
+	{
+		$this->Artikel_model->deleteArtikel($idArtikel);
+		redirect('administrator/artikel');
 	}
 
-	public function create()
+	public function update($idArtikel)
 	{
-		$this->form_validation->set_rules('judul', 'judul', 'required');
-		$this->form_validation->set_rules('isiartikel', 'isiartikel', 'required');
-		$this->form_validation->set_rules('kategori', 'kategori', 'required');
+		$data = [
+			'title' => 'Artikel | Update',
+			'sideName' => 'Artikel',
+			'artikel' => $this->Artikel_model->getArtikelById($idArtikel),
+			'kontenDinamis' => 'administrator/pages/artikel/update'
+		];
 
-		if ($this->form_validation->run() == FALSE) {
-			//panggil form tambah
-			$this->add();
+		$this->form_validation->set_rules('judul', 'Judul', 'required');
+		$this->form_validation->set_rules('isiartikel', 'isiArtikel', 'required');
+		$this->form_validation->set_rules('kategori', 'Kategori', 'required');
+
+		if ($this->form_validation->run() == false) {
+			$this->load->view($this->adminTemplate, $data);
 		} else {
-			$dataArtikel = [
-				'judul' 	=> $this->input->post('judul', true),
-				'isiartikel' => $this->input->post('isiartikel', true),
-				'kategori'	=> $this->input->post('kategori', true),
-				'tanggal'	=> date("Y-m-d H:i:s")
-			];
-
-			//kalau form diisi dengan benar maka simpan data ke table user
-			$this->Artikel_model->create($dataArtikel);
-
-			// //untuk notifikasi
-			$dataPesan = [
-				'alert' => 'alert-success',
-				'pesan' => 'Data posisi berhasil di tambahkan'
-			];
-
-			$this->session->set_flashdata($dataPesan);
-
-			// //pindahkan ke halaman login
 			redirect('administrator/artikel');
 		}
 	}
